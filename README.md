@@ -6,9 +6,10 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/hydrat-agency/laravel-db-dumper.svg?style=flat-square)](https://packagist.org/packages/hydrat-agency/laravel-db-dumper)
 
 Ever worked with Wordpress and used the WP-Cli ? How handful are `wp db:export` and `wp db:import` commands... 😻  
+
 This package brings the same functionality to Laravel. 
 
-Export database (with a full or relative path) : 
+- Export database to a file : 
 
 ```bash
 ❯ php artisan db:export /path/to/file.sql
@@ -17,7 +18,7 @@ Exporting database to /path/to/file.sql
 Database exported successfully.
 ```
 
-Import database from a file : 
+- Import database from a file : 
 
 ```bash
 ❯ php artisan db:import /path/to/file.sql
@@ -26,11 +27,11 @@ Importing database from /path/to/file.sql
 Database imported successfully.
 ```
 
+This package uses [spatie/db-dumper](https://github.com/spatie/db-dumper) in the background to generate db exports.  
+
 ## Installation
 
 This package requires php `>= 8.1` and laravel `>= 8.0`.  
-It uses [spatie/db-dumper](https://github.com/spatie/db-dumper) in the background to generate db exports.  
-
 
 You can install the package via composer:  
 
@@ -45,14 +46,14 @@ composer require hydrat-agency/laravel-db-dumper
 Exporting to a file :  
 
 ```bash
-php artisan db:export /path/to/file.sql  # full
-php artisan db:export ../dump.sql        # relative
+php artisan db:export /path/to/file.sql  # full path
+php artisan db:export ../dump.sql        # relative path
 ```
 
-If no file path is specified, a name will be automatically generated :  
+ℹ️ If you don't provide a filename in your path, a name will be automatically generated :  
 
 ```bash
-❯ art db:export
+❯ php artisan db:export
 
 Exporting database to /path/to/project/dbname_2022-10-05_09-59-48.sql
 Database exported successfully.
@@ -61,18 +62,23 @@ Database exported successfully.
 Importing from a file :  
 
 ```bash
-php artisan db:import /path/to/file.sql  # full
+php artisan db:import /path/to/file.sql  # full path
+php artisan db:import ../dump.sql        # relative path
 ```
 
 ### From your code
 
-Using the class :  
-
 ```php
-$laravelDbDumper = new Hydrat\LaravelDbDumper\LaravelDbDumper();
+# Using instance
+$dumper = new Hydrat\LaravelDbDumper\LaravelDbDumper();
+$dumper->dumpTo('path/to/file.sql', 'dbname');
+$dumper->importFrom('path/to/file.sql');
 
-$laravelDbDumper->dumpTo('path/to/file.sql', 'dbname');
-$laravelDbDumper->importFrom('path/to/file.sql');
+# Using facade
+use Hydrat\LaravelDbDumper\Facades\LaravelDbDumper;
+
+LaravelDbDumper::dumpTo('path/to/file.sql', 'dbname');
+LaravelDbDumper::importFrom('path/to/file.sql');
 ```
 
 ## Testing
@@ -87,11 +93,12 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+Feel free to contribute !
 
 ## Security Vulnerabilities
 
-If you find any security vulnerabilities, don't report it publicly. Instead, please contact me by private message.
+If you find any security vulnerabilities, please don't report it publicly.  
+Instead, contact me by private message or at thomas@hydrat.agency.
 
 ## Credits
 
