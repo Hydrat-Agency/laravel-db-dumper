@@ -45,12 +45,13 @@ composer require hydrat-agency/laravel-db-dumper
 
 Supported databases :
 
-| Database | Export | Import |
-| MySQL | ✅ | ✅ |
-| MariaDB | 🅾️ | ✅ |
-| PostgreSQL | 🅾️ | 🅾️ |
-| SQLite | 🅾️ | ✅ |
-| SQL Server | 🅾️ | 🅾️ |
+| Database | Export | Import |  
+| -------- | ------ | ------ |
+| MySQL | ✅ | ✅ |  
+| MariaDB | 🅾️ | ✅ |  
+| PostgreSQL | 🅾️ | 🅾️ |  
+| SQLite | 🅾️ | ✅ |  
+| SQL Server | 🅾️ | 🅾️ |  
 
 ### From artisan CLI
 
