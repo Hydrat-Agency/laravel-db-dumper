@@ -1,68 +1,78 @@
-# :package_description
+# Brings db:export/db:import command to laravel for easier environment propagation
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/:vendor_slug/:package_slug/run-tests?label=tests)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/:vendor_slug/:package_slug/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-<!--delete-->
----
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/hydrat-agency/laravel-db-dumper.svg?style=flat-square)](https://packagist.org/packages/hydrat-agency/laravel-db-dumper)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/hydrat-agency/laravel-db-dumper/run-tests?label=tests)](https://github.com/hydrat-agency/laravel-db-dumper/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/hydrat-agency/laravel-db-dumper/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/hydrat-agency/laravel-db-dumper/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/hydrat-agency/laravel-db-dumper.svg?style=flat-square)](https://packagist.org/packages/hydrat-agency/laravel-db-dumper)
 
-1. Press the "Use this template" button at the top of this repo to create a new repo with the contents of this skeleton.
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files.
-3. Have fun creating your package.
-4. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
----
-<!--/delete-->
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Ever worked with Wordpress and used the WP-Cli ? How handful are `wp db:export` and `wp db:import` commands... 😻  
+This package brings the same functionality to Laravel. 
 
-## Support us
+Export database (with a full or relative path) : 
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/:package_name.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/:package_name)
+```bash
+❯ php artisan db:export /path/to/file.sql
 
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
+Exporting database to /path/to/file.sql
+Database exported successfully.
+```
 
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+Import database from a file : 
+
+```bash
+❯ php artisan db:import /path/to/file.sql
+
+Importing database from /path/to/file.sql
+Database imported successfully.
+```
 
 ## Installation
 
-You can install the package via composer:
+This package requires php `>= 8.1` and laravel `>= 8.0`.  
+It uses [spatie/db-dumper](https://github.com/spatie/db-dumper) in the background to generate db exports.  
+
+
+You can install the package via composer:  
 
 ```bash
-composer require :vendor_slug/:package_slug
-```
-
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag=":package_slug-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag=":package_slug-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag=":package_slug-views"
+composer require hydrat-agency/laravel-db-dumper
 ```
 
 ## Usage
 
+### From artisan CLI
+
+Exporting to a file :  
+
+```bash
+php artisan db:export /path/to/file.sql  # full
+php artisan db:export ../dump.sql        # relative
+```
+
+If no file path is specified, a name will be automatically generated :  
+
+```bash
+❯ art db:export
+
+Exporting database to /path/to/project/dbname_2022-10-05_09-59-48.sql
+Database exported successfully.
+```
+
+Importing from a file :  
+
+```bash
+php artisan db:import /path/to/file.sql  # full
+```
+
+### From your code
+
+Using the class :  
+
 ```php
-$variable = new VendorName\Skeleton();
-echo $variable->echoPhrase('Hello, VendorName!');
+$laravelDbDumper = new Hydrat\LaravelDbDumper\LaravelDbDumper();
+
+$laravelDbDumper->dumpTo('path/to/file.sql', 'dbname');
+$laravelDbDumper->importFrom('path/to/file.sql');
 ```
 
 ## Testing
@@ -81,11 +91,11 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security Vulnerabilities
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+If you find any security vulnerabilities, don't report it publicly. Instead, please contact me by private message.
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
+- [Hydrat Agency](https://github.com/Hydrat-Agency)
 - [All Contributors](../../contributors)
 
 ## License
