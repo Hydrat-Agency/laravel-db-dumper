@@ -9,9 +9,9 @@ Brings `db:export` and `db:import` artisan commands to Laravel, to easily copy d
 
 Ever worked with Wordpress and used the WP-Cli ? How handful are `wp db:export` and `wp db:import` commands... 😻  
 
-This package brings the same functionality to Laravel. 
+This package brings the same functionality to Laravel. You can...   
 
-- Export database to a file : 
+- ... export database to a SQL file : 
 
 ```bash
 ❯ php artisan db:export /path/to/file.sql
@@ -20,7 +20,7 @@ Exporting database to /path/to/file.sql
 Database exported successfully.
 ```
 
-- Import database from a file : 
+- ... import database from an SQL file : 
 
 ```bash
 ❯ php artisan db:import /path/to/file.sql
@@ -43,7 +43,7 @@ composer require hydrat-agency/laravel-db-dumper
 
 ## Usage
 
-Supported databases :
+### Supported databases
 
 | Database | Export | Import |  
 | -------- | ------ | ------ |
@@ -53,16 +53,16 @@ Supported databases :
 | SQLite | 🅾️ | ✅ |  
 | SQL Server | 🅾️ | 🅾️ |  
 
-### From artisan CLI
+### Using Db Dumper from artisan CLI
 
-Exporting to a file :  
+- Exporting to a file :  
 
 ```bash
 php artisan db:export /path/to/file.sql  # full path
 php artisan db:export ../dump.sql        # relative path
 ```
 
-ℹ️ If you don't provide a filename in your path, a name will be automatically generated :  
+ℹ If you don't provide a filename in your path, a name will be automatically generated :  
 
 ```bash
 ❯ php artisan db:export
@@ -71,14 +71,14 @@ Exporting database to /path/to/project/dbname_2022-10-05_09-59-48.sql
 Database exported successfully.
 ```
 
-Importing from a file :  
+- Importing from a file :  
 
 ```bash
 php artisan db:import /path/to/file.sql  # full path
 php artisan db:import ../dump.sql        # relative path
 ```
 
-### From your code
+### Using Db Dumper from your code
 
 ```php
 # Using instance
