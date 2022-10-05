@@ -1,4 +1,6 @@
-# Brings db:export/db:import command to laravel for easier environment propagation
+# Laravel DB dumper
+
+Brings `db:export` and `db:import` artisan commands to Laravel, to easily copy database to another environment.
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/hydrat-agency/laravel-db-dumper.svg?style=flat-square)](https://packagist.org/packages/hydrat-agency/laravel-db-dumper)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/hydrat-agency/laravel-db-dumper/run-tests?label=tests)](https://github.com/hydrat-agency/laravel-db-dumper/actions?query=workflow%3Arun-tests+branch%3Amain)
@@ -40,6 +42,15 @@ composer require hydrat-agency/laravel-db-dumper
 ```
 
 ## Usage
+
+Supported databases :
+
+| Database | Export | Import |
+| MySQL | ✅ | ✅ |
+| MariaDB | 🅾️ | ✅ |
+| PostgreSQL | 🅾️ | 🅾️ |
+| SQLite | 🅾️ | ✅ |
+| SQL Server | 🅾️ | 🅾️ |
 
 ### From artisan CLI
 
